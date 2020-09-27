@@ -12,7 +12,7 @@ def pengeboran(max_distance, pengeboran_per_meter, price):
   res_drill = distance_drill + distance_price
   return res_drill
 
-def pompa(pump_price):
+def cost_pompa(pump_price):
   res_pompa = 1*pump_price
   return res_pompa 
 
@@ -31,6 +31,10 @@ def utamaRW(price):
 def sekunderRT(rt, price):
   tamp_rt = 1 * price # 1 x harga tampungan pipa rt
   return tamp_rt
+
+def total_cost(total_drill, total_pump): ## nanti tambahin sama yang lain
+  cost = total_drill + total_pump
+  return cost
 
 # no_rw = 0 #variable no rw
 # jum_rt = 0 #variable jumlah rt
@@ -93,7 +97,7 @@ temp_price_tamp = pricing_tamp(kk)
 ## database harga diluar kondisi
 ## seperti harga permeter
 meter_bor = 100000 ## harga pengeboran per meternya
-pompa = 3000000 ## harga satuan pompa
+pompa_price = 3000000 ## harga satuan pompa
 ## Implementasi kalkulasi rumus
 
 ## Kalkulasi pengeboran 
@@ -104,11 +108,20 @@ print("Harga Pengeboran: Rp ", p_pengeboran)
 print("----------------------------")
 ####
 
+### Kalkulasi Harga Pompa
+print("----------------------------")
+
+p_pompa = cost_pompa(pompa_price) ## Total perhitungan harga pompa
+print("Harga Pompa: Rp ", p_pompa)
+print("----------------------------")
 
 
+
+####
+biaya = total_cost(p_pengeboran, p_pompa)
 
 print('Output Prediksi Harga')
 
 print("Lokasi Sumur: ", no_rw)
 print("Jangkauan Layanan: ", jangkauan)
-all_price = p_pengeboran #sementara dulu,nanti ditambahin yang lain juga
+print("Total Biaya: Rp ", biaya)
