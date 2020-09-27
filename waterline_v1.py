@@ -86,6 +86,7 @@ pompa = 3000000 ## harga satuan pompa
 ## Main Calculation
 
 p_pengeboran = ''
+pipe_uses = ''
 
 
 
