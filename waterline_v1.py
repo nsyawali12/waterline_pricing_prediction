@@ -7,7 +7,9 @@ def rukun_warga(rt):
   return rw
 
 def pengeboran(max_distance, pengeboran_per_meter, price):
-  res_drill = (max_distance * pengeboran_per_meter) + (max_distance * price)
+  distance_drill = (max_distance * pengeboran_per_meter)
+  distance_price = (max_distance * price)
+  res_drill = distance_drill + distance_price
   return res_drill
 
 def pompa(pump_price):
@@ -29,10 +31,6 @@ def utamaRW(price):
 def sekunderRT(rt, price):
   tamp_rt = 1 * price # 1 x harga tampungan pipa rt
   return tamp_rt
-
-def allprice(price):
-  all_p =+ price
-  return all_p
 
 # no_rw = 0 #variable no rw
 # jum_rt = 0 #variable jumlah rt
@@ -58,38 +56,53 @@ jangkauan = kk
 
 ## PRicing dari database jumlah KK
 print('Pricing')
-if (kk >= 0) and (kk <= 200):
-  print('Pipa 0.5m')
-  pipe_price = 2000
-  print('tampungan 1x1m')
-  t_price = 500000
-  
 
-elif (kk > 200) and (kk <= 600):
-  print('Pipa 1m')
-  pipe_price = 4000
-  print('tampungan 2x2m')
-  t_price = 1000000
-
+def pricing_pipe(jum_kk):
+  if (jum_kk >= 0) and (jum_kk <= 200):
+    print('Pipa 0.5m')
+    pipe_price = 2000
+    
+  elif (jum_kk > 200) and (jum_kk <= 600):
+    print('Pipa 1m')
+    pipe_price = 4000
+    
+  elif (jum_kk > 600) and (jum_kk<1000):
+    print('Pipa 1.5')
+    pipe_price = 6000
   
-elif (kk > 600) and (kk<1000):
-  print('Pipa 1.5')
-  price = 6000
-  print('tampungan 3x3m')
-  t_price = 1500000
+  return pipe_price
+
+def pricing_tamp(jum_kk):
+  if (jum_kk >= 0) and (jum_kk <= 200):
+    print('tampungan 1x1m')
+    t_price = 500000
+    
+  elif (jum_kk > 200) and (jum_kk <= 600):
+    print('tampungan 2x2m')
+    t_price = 1000000
+    
+  elif (jum_kk > 600) and (jum_kk<1000):
+    print('tampungan 3x3m')
+    t_price = 1500000
+  
+  return t_price
+
+temp_price_pipe = pricing_pipe(kk)#harga yang bersih, belum dikalkulasi dengan variabel lain
+temp_price_tamp = pricing_tamp(kk)
 
 ## database harga diluar kondisi
 ## seperti harga permeter
 meter_bor = 100000 ## harga pengeboran per meternya
 pompa = 3000000 ## harga satuan pompa
+## Implementasi kalkulasi rumus
 
-## Main Calculation
+## Kalkulasi pengeboran 
+print("----------------------------")
 
-p_pengeboran = ''
-pipe_uses = ''
-meter_uses = ''
-
-
+p_pengeboran = pengeboran(s_max, meter_bor, temp_price_pipe) ##Pengeboran pipa
+print("Harga Pengeboran: Rp ", p_pengeboran)
+print("----------------------------")
+####
 
 
 
@@ -98,3 +111,4 @@ print('Output Prediksi Harga')
 
 print("Lokasi Sumur: ", no_rw)
 print("Jangkauan Layanan: ", jangkauan)
+all_price = p_pengeboran #sementara dulu,nanti ditambahin yang lain juga
