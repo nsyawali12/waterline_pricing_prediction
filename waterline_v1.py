@@ -87,6 +87,7 @@ pompa = 3000000 ## harga satuan pompa
 
 p_pengeboran = ''
 pipe_uses = ''
+meter_uses = ''
 
 
 
