@@ -49,8 +49,8 @@ print("----Input Several Valeus----")
 no_rw = input("Nomor RW: ")
 jum_rt = input("Jumlah RT: ")
 kk = int(input("Kepala Keluarga: "))
-s_min = input("Kedalaman Sumur Minimal: ")
-s_max = input("Kedalaman Sumur Maksimal: ")
+s_min = int(input("Kedalaman Sumur Minimal: "))
+s_max = int(input("Kedalaman Sumur Maksimal: "))
 water_s = input("Status Kekurangan Air (Y/N): ")
 
 ## Jangkauan layanan = Jumlah kapasitas kepala keluarga
@@ -67,11 +67,23 @@ if (kk >= 0) and (kk <= 200):
 
 elif (kk > 200) and (kk <= 600):
   print('Pipa 1m')
-  price = 4000
+  pipe_price = 4000
+  print('tampungan 2x2m')
+  t_price = 1000000
+
   
 elif (kk > 600) and (kk<1000):
   print('Pipa 1.5')
   price = 6000
+  print('tampungan 3x3m')
+  t_price = 1500000
+
+## database harga diluar kondisi
+## seperti harga permeter
+meter_bor = 100000 ## harga pengeboran per meternya
+pompa = 3000000 ## harga satuan pompa
+
+
 
 
 
