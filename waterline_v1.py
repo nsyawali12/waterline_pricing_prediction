@@ -83,6 +83,9 @@ elif (kk > 600) and (kk<1000):
 meter_bor = 100000 ## harga pengeboran per meternya
 pompa = 3000000 ## harga satuan pompa
 
+## Main Calculation
+
+p_pengeboran = ''
 
 
 
