@@ -16,12 +16,12 @@ def cost_pompa(pump_price):
   res_pompa = 1*pump_price
   return res_pompa 
 
-def harga_pipa_tampungan(d_to_rt, price): #pipe price disini pipa kelas rt
+def cost_pipa_tampungan(d_to_rt, price): #pipe price disini pipa kelas rt
   res_pipa_tampungan = d_to_rt  * price # jarak ke RT x harga kelas pipa rt
   return res_pipa_tampungan
 
-def tampungan(res_pipa_tampungan):
-  total_tampungan = res_pipa_tampungan #total semua dari pipa tampungan
+def tampungan(res_tampungan):
+  total_tampungan = res_tampungan #total semua dari pipa tampungan
   return total_tampungan
 
 def utamaRW(price):
@@ -49,14 +49,44 @@ print("Welcome to Waterline Pricing")
 print("----------------------------")
 print("----Input Several Valeus----")
 no_rw = input("Nomor RW: ")
-jum_rt = input("Jumlah RT: ")
-kk = int(input("Kepala Keluarga: "))
+
+jum_rt = int(input("Jumlah RT: "))
+
+#----------- LOOPING RT ----------- #
+kk_rt = [] ## variabbel jumlah orang per rt
+range_rt = [] ## list masing masing jarak rt
+i_rt = [] ## Index RT Ke berapa?
+
+## looping keterangan per rt
+for n_rt in range (jum_rt):
+  rt_ke = int(input("RT KE: "))
+  rt_p = int(input("Jumlah Kepala Keluarga di RT: "))
+  r_rt = int(input("Jarak Lingkungan RT: "))
+
+  i_rt.append(rt_ke)
+  kk_rt.append(rt_p)
+  range_rt.append(r_rt)
+
+
+###################################
+
+kk = sum(kk_rt) 
+## !!! Hati hati siapa tau perhitungan bukan dari 
+#jumlah seluruh KK, soalnya kan klasifikasi harganya dari sini
+#siapa tau beda pipa
+
+#kk = int(input("Kepala Keluarga: "))
+print("Jumlah seluruh kepala keluarga: ", kk)
+
 s_min = int(input("Kedalaman Sumur Minimal: "))
 s_max = int(input("Kedalaman Sumur Maksimal: "))
 water_s = input("Status Kekurangan Air (Y/N): ")
 
 ## Jangkauan layanan = Jumlah kapasitas kepala keluarga
 jangkauan = kk 
+
+
+
 
 ## PRicing dari database jumlah KK
 print('Pricing')
