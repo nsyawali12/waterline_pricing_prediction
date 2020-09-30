@@ -20,7 +20,7 @@ def cost_pipa_tampungan(d_to_rt, price): #pipe price disini pipa kelas rt
   res_pipa_tampungan = d_to_rt  * price # jarak ke RT x harga kelas pipa rt
   return res_pipa_tampungan
 
-def tampungan(res_tampungan):
+def tampungan(total_2nd, total_utama):
   total_tampungan = res_tampungan #total semua dari pipa tampungan
   return total_tampungan
 
@@ -85,10 +85,15 @@ water_s = input("Status Kekurangan Air (Y/N): ")
 ## Jangkauan layanan = Jumlah kapasitas kepala keluarga
 jangkauan = kk 
 
-
+class_pipe = [] ### List tipe tipe pipa dari range rt
+class_tampungan = [] ### list tipe tipe tampungan dari range rt
 
 
 ## PRicing dari database jumlah KK
+
+## Pricing Classification 
+
+
 print('Pricing')
 
 def pricing_pipe(jum_kk):
