@@ -28,7 +28,7 @@ def utamaRW(price):
   tamp_rw = 1 * price # 1 x harga tampungan dari kelas semua total KK
   return tamp_rw
 
-def sekunderRT(rt, price):
+def sekunderRT(price):
   tamp_rt = 1 * price # 1 x harga tampungan pipa rt
   return tamp_rt
 
@@ -127,15 +127,20 @@ print("Pricing list")
 
 # bikin si looping klasifikasi pipe dan tampungan harganya disini
 
-# Classification Pipe and Tampungan
+# Classification Pipe
 for n in kk_rt:
   p_pipe = pricing_pipe(n)
-  p_tamp = pricing_tampung(n)
-  
   class_pipe.append(p_pipe)
-  class_tampungan.append(p_tamp)
+  
+sekunder_list = [] ## list sekunder dari RT
 
+for t in kk_rt:
+  p_tamp = pricing_tampung(n)
+  s_tamp = sekunderRT(p_tamp) ## sekunder tampungan
+  class_tampungan.append(p_tamp)
+  sekunder_list.append(s_tamp)
 ### Temporary ####
 ## cuma pengen tau panjang array kelas pipa setelah diklasifikasi
 print("Panjang Array Klasifikasi Pipa: ", len(class_pipe))
 print("Panjang Array Klasifikasi Tampungan: ", len(class_tampungan))
+print("Panjang Array Sekunder: ", len(sekunder_list))
