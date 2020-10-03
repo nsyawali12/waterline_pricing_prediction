@@ -20,8 +20,8 @@ def cost_pipa_tampungan(d_to_rt, price): #pipe price disini pipa kelas rt
   res_pipa_tampungan = d_to_rt  * price # jarak ke RT x harga kelas pipa rt
   return res_pipa_tampungan
 
-def tampungan(total_2nd, total_utama):
-  total_tampungan = res_tampungan #total semua dari pipa tampungan
+def cost_tampungan(total_utama, total_sekunder):
+  total_tampungan = total_utama + total_sekunder #total semua dari pipa tampungan
   return total_tampungan
 
 def utamaRW(price):
@@ -60,7 +60,7 @@ def pricing_tampung(jum_kk):
     # print("tampungan 1x1 m")
     tamp_price = 500000
   
-  elif (jum_kk >= 200) and (jum_kk <= 600):
+  elif (jum_kk > 200) and (jum_kk <= 600):
     #untuk tampungan 2x2 meter
     # print("tampungan 2x2 m") 
     tamp_price = 1000000
@@ -127,20 +127,45 @@ print("Pricing list")
 
 # bikin si looping klasifikasi pipe dan tampungan harganya disini
 
-# Classification Pipe
+#----- Classification Pipe -----#
 for n in kk_rt:
   p_pipe = pricing_pipe(n)
   class_pipe.append(p_pipe)
+#################################
   
+#----- Classification Tampungan -----#  
 sekunder_list = [] ## list sekunder dari RT
 
+# Classification Tampungan and Sekunder
 for t in kk_rt:
-  p_tamp = pricing_tampung(n)
+  p_tamp = pricing_tampung(t)
   s_tamp = sekunderRT(p_tamp) ## sekunder tampungan
   class_tampungan.append(p_tamp)
   sekunder_list.append(s_tamp)
+#######################################
+
 ### Temporary ####
+
+### Tampungan UTAMA ###
+### Tampungan kelas RW 
+### Kalau mau otomatis harganya, berarti pake dari hasil klasifikasi tampungan kepala keluarga
+t_rw = 1500000 
+tamp_utama = utamaRW(t_rw) ## Total harga utama
+t_2nd = sum(sekunder_list) ## Total Semua harga tampungan sekunder
+tampungan = cost_tampungan(tamp_utama, t_2nd)
+
+
 ## cuma pengen tau panjang array kelas pipa setelah diklasifikasi
 print("Panjang Array Klasifikasi Pipa: ", len(class_pipe))
 print("Panjang Array Klasifikasi Tampungan: ", len(class_tampungan))
 print("Panjang Array Sekunder: ", len(sekunder_list))
+
+### Perhitungan Tampungan
+idx_s = 1 ## Buat tau index sekundernya
+for nd in sekunder_list:
+  print("Tampungan Sekunder Ke", idx_s, ":" , nd)
+  idx_s = idx_s+1
+
+print("Total Harga Tampungan Sekunder: ", t_2nd)
+print("Harga Tampungan Utama: ", tamp_utama)
+print("Harga Tampungan: ", tampungan)
