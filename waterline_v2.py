@@ -1,3 +1,4 @@
+
 import numpy as np
 import math
 
@@ -32,8 +33,8 @@ def sekunderRT(price):
   tamp_rt = 1 * price # 1 x harga tampungan pipa rt
   return tamp_rt
 
-def total_cost(total_drill, total_pump): ## nanti tambahin sama yang lain
-  cost = total_drill + total_pump
+def total_cost(t_HPT, t_tampungan, t_drill, t_pump): ## nanti tambahin sama yang lain
+  cost = t_HPT + t_tampungan + t_drill + t_pump
   return cost
 
 def pricing_pipe(jum_kk):
@@ -166,6 +167,45 @@ for nd in sekunder_list:
   print("Tampungan Sekunder Ke", idx_s, ":" , nd)
   idx_s = idx_s+1
 
+
 print("Total Harga Tampungan Sekunder: ", t_2nd)
 print("Harga Tampungan Utama: ", tamp_utama)
 print("Harga Tampungan: ", tampungan)
+
+### Perhitungan Harga Pipa Tampungan ###
+total_HPT = '' ## temporary nanti di masukkin setelah harga per tampungannya ada
+HPT_list = []
+
+idx_hpt = 1
+for r_rt, c_pipe in zip(range_rt, class_pipe):
+  hpt = cost_pipa_tampungan(r_rt, c_pipe)
+  print("harga HPT ke ", idx_hpt, ":", hpt)
+  HPT_list.append(hpt)
+  idx_hpt += 1
+
+total_HPT = sum(HPT_list)
+print("Total semua HPT: ", total_HPT)
+
+#######################################
+
+#--- Pengeboran ---#
+meter_bor = 100000
+p_pipe_for_bor = pricing_pipe(total_kk) ## baru diambil dari klasifikasi pipe, bukan dari kelas pipa utama
+total_drill = pengeboran(s_max, meter_bor, p_pipe_for_bor)
+print("Total Pengeboran: ", total_drill)
+
+#------------------#
+
+#--- Pompa ---#
+price_pump = 3000000
+pump = cost_pompa(price_pump)
+total_pump = pump
+print("Harga Pompa: ", total_pump)
+###############
+
+#--- Total Cost ---#
+total_biaya = total_cost(total_HPT, tampungan, total_drill, total_pump)
+print("Total Cost Keseluruhan: ", total_biaya)
+####################
+
+
